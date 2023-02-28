@@ -6,3 +6,4 @@ class Muestra:
         self.filas = filas
         self.columnas = columnas
         self.listado_celda_viva = listado_celda_viva
+        self.siguiente = None

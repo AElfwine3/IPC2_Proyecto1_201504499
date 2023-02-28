@@ -4,3 +4,4 @@ class CeldaViva:
         self.fila = fila
         self.columna = columna
         self.codigo_organismo = codigo_organismo
+        self.siguiente = None

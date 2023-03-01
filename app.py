@@ -1,14 +1,10 @@
 import tkinter as tk
 from tkinter import filedialog
-from sys import path
-from os import getcwd
+from Controllers import leer_xml, graficar_muestra
 
-path.append(getcwd()+'\\Controllers')
-path.append(getcwd()+'\\List_access')
-
-import leer_xml
 import OrganismoSingleton
 import MuestraSingleton
+
 
 lista_organismo = OrganismoSingleton.OrganismoSingleton.getInstance().listaOrganismo
 lista_muestra = MuestraSingleton.MuestraSingleton.getInstance().listaMuestra
@@ -21,7 +17,10 @@ if not file_path.endswith('.xml'):
     print('El archivo no es un xml')
 else:
     leer_xml.leer_xml(file_path)
-    for key, value in lista_organismo.mostrar().items():
-        print(key, ':', value)
-    for key, value in lista_muestra.mostrar().items():
-        print(key, ':', value)
+    for objeto in lista_organismo.mostrar():
+        for key, value in objeto.items():
+            print(key, ':', value)
+    for objeto in lista_muestra.mostrar():
+        for key, value in objeto.items():
+            print(key, ':', value)
+    graficar_muestra.generar_grafica('A03')

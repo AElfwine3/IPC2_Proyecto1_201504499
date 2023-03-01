@@ -54,7 +54,7 @@ def agregar_celdaViva(listado_celda):
             
 
 def for_recursivo(objeto_xml, tabulacion = ''):
-    print(f"{tabulacion}{objeto_xml.tag}")
+    # print(f"{tabulacion}{objeto_xml.tag}")
     tabulacion += '\t'
     if objeto_xml.tag == 'organismo':
         agregar_organismo(objeto_xml)

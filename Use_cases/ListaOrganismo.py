@@ -19,10 +19,23 @@ class ListaOrganismo:
                 nodo_actual = nodo_actual.siguiente
             nodo_actual.siguiente = nodo_organismo
     
+    def obtener_organismo(self, codigo):
+        nodo_actual = self.inicio
+        while nodo_actual is not None:
+            if nodo_actual.codigo == codigo:
+                return nodo_actual
+            nodo_actual = nodo_actual.siguiente
+        return None
+
     def mostrar(self):
         nodo_actual = self.inicio
-        lista = {}
+        lista = []
         while nodo_actual is not None:
-            lista[nodo_actual.codigo] = nodo_actual.nombre
+            orga = {
+                'Codigo': nodo_actual.codigo,
+                'Nombre': nodo_actual.nombre,
+                'Color': nodo_actual.color
+            }
+            lista.append(orga)
             nodo_actual = nodo_actual.siguiente
         return lista

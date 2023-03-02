@@ -17,16 +17,16 @@ class ListaMuestra:
             nodo_muestra.siguiente = self.inicio
             self.inicio = nodo_muestra
     
-    def verificar_celda_viva(self, fila, columna):
-        nodo_actual = self.inicio
-        while nodo_actual is not None:
-            nodo_celda_viva = nodo_actual.listado_celda_viva.inicio
-            while nodo_celda_viva is not None:
-                if nodo_celda_viva.fila == fila and nodo_celda_viva.columna == columna:
-                    return True
-                nodo_celda_viva = nodo_celda_viva.siguiente
-            nodo_actual = nodo_actual.siguiente
-        return False
+    # def verificar_celda_viva(self, fila, columna):
+    #     nodo_actual = self.inicio
+    #     while nodo_actual is not None:
+    #         nodo_celda_viva = nodo_actual.listado_celda_viva.inicio
+    #         while nodo_celda_viva is not None:
+    #             if nodo_celda_viva.fila == fila and nodo_celda_viva.columna == columna:
+    #                 return True
+    #             nodo_celda_viva = nodo_celda_viva.siguiente
+    #         nodo_actual = nodo_actual.siguiente
+    #     return False
 
     def obtener_muestra(self, codigo):
         nodo_actual = self.inicio
@@ -43,9 +43,9 @@ class ListaMuestra:
             objeto = {
                 'Codigo': nodo_actual.codigo,
                 'Descripcion': nodo_actual.descripcion,
-                'Filas': nodo_actual.filas,
-                'Columnas': nodo_actual.columnas,
-                'Celdas Vivas': nodo_actual.listado_celda_viva.mostrar()
+                # 'Filas': nodo_actual.filas,
+                # 'Columnas': nodo_actual.columnas,
+                # 'Celdas Vivas': nodo_actual.listado_celda_viva.mostrar()
             }
             lista.append(objeto)
             nodo_actual = nodo_actual.siguiente

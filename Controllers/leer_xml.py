@@ -11,25 +11,20 @@ import Muestra
 import CeldaViva
 
 import ListaCeldaViva
-# import ListaOrganismo
-# import ListaMuestra
 import OrganismoSingleton
 import MuestraSingleton
 
 lista_organismo = OrganismoSingleton.OrganismoSingleton.getInstance().listaOrganismo
 lista_muestra = MuestraSingleton.MuestraSingleton.getInstance().listaMuestra
-# lista_organismo = ListaOrganismo.ListaOrganismo()
-# lista_muestra = ListaMuestra.ListaMuestra()
 
 
 def agregar_organismo(organismo):
-    codigo = ''
-    nombre = ''
+    atributos = {}
     for atributo in organismo:
-        codigo = atributo.text if atributo.tag == 'codigo' else codigo
-        nombre = atributo.text if atributo.tag == 'nombre' else nombre
-    nodo_organismo = Organismo.Organismo(codigo, nombre)
-    lista_organismo.agregar(nodo_organismo)
+        atributos[atributo.tag] = atributo.text
+    if atributos:
+        nodo_organismo = Organismo.Organismo(atributos['codigo'], atributos['nombre'])
+        lista_organismo.agregar(nodo_organismo)
 
 def agregar_muestra(muestra):
     atributos = {}
@@ -54,7 +49,6 @@ def agregar_celdaViva(listado_celda):
             
 
 def for_recursivo(objeto_xml, tabulacion = ''):
-    # print(f"{tabulacion}{objeto_xml.tag}")
     tabulacion += '\t'
     if objeto_xml.tag == 'organismo':
         agregar_organismo(objeto_xml)

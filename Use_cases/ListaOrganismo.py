@@ -27,6 +27,24 @@ class ListaOrganismo:
             nodo_actual = nodo_actual.siguiente
         return None
 
+    def tamano(self):
+        nodo_actual = self.inicio
+        contador = 0
+        while nodo_actual is not None:
+            contador += 1
+            nodo_actual = nodo_actual.siguiente
+        return contador
+    
+    def recorrer(self, indice):
+        nodo_actual = self.inicio
+        contador = 0
+        while nodo_actual is not None:
+            if indice == contador:
+                return nodo_actual
+            contador += 1
+            nodo_actual = nodo_actual.siguiente
+        return None
+
     def mostrar(self):
         nodo_actual = self.inicio
         lista = []
@@ -34,7 +52,7 @@ class ListaOrganismo:
             orga = {
                 'Codigo': nodo_actual.codigo,
                 'Nombre': nodo_actual.nombre,
-                'Color': nodo_actual.color
+                # 'Color': nodo_actual.color
             }
             lista.append(orga)
             nodo_actual = nodo_actual.siguiente

@@ -18,27 +18,111 @@ class ListaCeldaViva:
             self.inicio = nodo_celda_viva
 
     def is_celda_viva(self, fila, columna):
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if self.encontrar_celda_viva(fila+i, columna+j):
+                    return True
+        return False
+    
+    def encontrar_celda_viva(self, fila, columna):
         nodo_actual = self.inicio
         while nodo_actual is not None:
             if int(nodo_actual.fila) == fila and int(nodo_actual.columna) == columna:
                 return True
-            if int(nodo_actual.fila)-1 == fila and int(nodo_actual.columna)-1 == columna:
-                return True
-            if int(nodo_actual.fila)-1 == fila and int(nodo_actual.columna) == columna:
-                return True
-            if int(nodo_actual.fila)-1 == fila and int(nodo_actual.columna)+1 == columna:
-                return True
-            if int(nodo_actual.fila) == fila and int(nodo_actual.columna)-1 == columna:
-                return True
-            if int(nodo_actual.fila) == fila and int(nodo_actual.columna)+1 == columna:
-                return True
-            if int(nodo_actual.fila)+1 == fila and int(nodo_actual.columna)-1 == columna:
-                return True
-            if int(nodo_actual.fila)+1 == fila and int(nodo_actual.columna) == columna:
-                return True
-            if int(nodo_actual.fila)+1 == fila and int(nodo_actual.columna)+1 == columna:
-                return True
             nodo_actual = nodo_actual.siguiente
+        return False
+    
+    def vecinos_celda_viva(self, fila, columna, codigo):
+        for i in range(-1, 2):
+            for j in range(-1, 2):
+                if i == 0 and j == 0:
+                    continue
+                code = self.codigo_organismo(fila+i, columna+j)
+                if self.encontrar_celda_viva(fila+i, columna+j):
+                    if code != codigo:
+                        return True
+
+    def horizontal_celda_viva(self, fila, columna, codigo):
+        if self.encontrar_celda_viva(fila, columna+1) and self.codigo_organismo(fila, columna+1) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila, columna+contador):
+                    if self.codigo_organismo(fila, columna+contador) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila, columna-1) and self.codigo_organismo(fila, columna-1) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila, columna-contador):
+                    if self.codigo_organismo(fila, columna-contador) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila+1, columna) and self.codigo_organismo(fila+1, columna) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila+contador, columna):
+                    if self.codigo_organismo(fila+contador, columna) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila-1, columna) and self.codigo_organismo(fila-1, columna) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila-contador, columna):
+                    if self.codigo_organismo(fila-contador, columna) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila+1, columna+1) and self.codigo_organismo(fila+1, columna+1) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila+contador, columna+contador):
+                    if self.codigo_organismo(fila+contador, columna+contador) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila+1, columna-1) and self.codigo_organismo(fila+1, columna-1) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila+contador, columna-contador):
+                    if self.codigo_organismo(fila+contador, columna-contador) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila-1, columna+1) and self.codigo_organismo(fila-1, columna+1) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila-contador, columna+contador):
+                    if self.codigo_organismo(fila-contador, columna+contador) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
+        elif self.encontrar_celda_viva(fila-1, columna-1) and self.codigo_organismo(fila-1, columna-1) != codigo:
+            contador = 1
+            while True:
+                if self.encontrar_celda_viva(fila-contador, columna-contador):
+                    if self.codigo_organismo(fila-contador, columna-contador) == codigo:
+                        return True
+                    else:
+                        contador += 1
+                else:
+                    break
         return False
     
     def existe_fila(self, fila):
@@ -53,6 +137,7 @@ class ListaCeldaViva:
             nodo_actual = nodo_actual.siguiente
         return False
 
+    # si me sirve
     def codigo_organismo(self, fila, columna):
         nodo_actual = self.inicio
         while nodo_actual is not None:

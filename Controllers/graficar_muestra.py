@@ -1,12 +1,14 @@
 import os
-import MuestraSingleton
-import OrganismoSingleton
+from List_access import MuestraSingleton, OrganismoSingleton
 
 lista_muestra = MuestraSingleton.MuestraSingleton.getInstance().listaMuestra
 lista_organismo = OrganismoSingleton.OrganismoSingleton.getInstance().listaOrganismo
 
 def generar_grafica(codigo):
     muestra = lista_muestra.obtener_muestra(codigo)
+    if not muestra:
+        print(f'No se encontro la muestra con el codigo {codigo}')
+        return
     celdas_vivas = muestra.listado_celda_viva
     with open(f'Tablero_{codigo}.dot',mode="w") as grafica:
         grafica.write('digraph Peliculas{\n')
@@ -31,7 +33,7 @@ def generar_grafica(codigo):
                         contador_columnas_vacias = 0
                         organismo = lista_organismo.obtener_organismo(celdas_vivas.codigo_organismo(i, j))
                         if organismo == None:
-                            grafica.write(f'\t\t\t<TD style="radial" bgcolor="#F7F7FF:#B9C0DA"> {i}{j} </TD>\n')
+                            grafica.write(f'\t\t\t<TD style="radial" bgcolor="#F7F7FF:#B9C0DA"> {i}, {j} </TD>\n')
                         else:
                             grafica.write(f'\t\t\t<TD style="radial" bgcolor="{organismo.color}"></TD>\n')
                     if j+1 == int(muestra.columnas) and contador_columnas_vacias > 0:

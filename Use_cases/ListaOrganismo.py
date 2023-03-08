@@ -1,16 +1,12 @@
-from sys import path
-from os import getcwd
-
-path.append(getcwd()+'\\Marte')
-
-import Organismo
+from Marte import Organismo
 
 class ListaOrganismo:
 
     def __init__(self):
         self.inicio = None
     
-    def agregar(self, nodo_organismo: Organismo.Organismo):
+    def agregar(self, codigo, nombre):
+        nodo_organismo = Organismo.Organismo(codigo, nombre)
         if self.inicio is None:
             self.inicio = nodo_organismo
         else:

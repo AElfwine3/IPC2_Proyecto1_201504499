@@ -1,9 +1,4 @@
-from sys import path
-from os import getcwd
-
-path.append(getcwd()+'\\Use_cases')
-
-import ListaOrganismo
+from Use_cases import ListaOrganismo
 
 class OrganismoSingleton:
 

@@ -1,32 +1,37 @@
-from sys import path
-from os import getcwd
-
-path.append(getcwd()+'\\Marte')
-
-import Muestra
+from Marte import Muestra
 
 class ListaMuestra:
 
     def __init__(self):
         self.inicio = None
     
-    def agregar(self, nodo_muestra: Muestra.Muestra):
+    def agregar(self, codigo, descripcion, filas, columnas, listado_celda_viva):
+        nodo_muestra = Muestra.Muestra(codigo, descripcion, filas, columnas, listado_celda_viva)
         if self.inicio == None:
             self.inicio = nodo_muestra
         else:
-            nodo_muestra.siguiente = self.inicio
-            self.inicio = nodo_muestra
-    
-    # def verificar_celda_viva(self, fila, columna):
-    #     nodo_actual = self.inicio
-    #     while nodo_actual is not None:
-    #         nodo_celda_viva = nodo_actual.listado_celda_viva.inicio
-    #         while nodo_celda_viva is not None:
-    #             if nodo_celda_viva.fila == fila and nodo_celda_viva.columna == columna:
-    #                 return True
-    #             nodo_celda_viva = nodo_celda_viva.siguiente
-    #         nodo_actual = nodo_actual.siguiente
-    #     return False
+            nodo_actual = self.inicio
+            while nodo_actual.siguiente is not None:
+                nodo_actual = nodo_actual.siguiente
+            nodo_actual.siguiente = nodo_muestra
+
+    def tamano(self):
+        nodo_actual = self.inicio
+        contador = 0
+        while nodo_actual is not None:
+            contador += 1
+            nodo_actual = nodo_actual.siguiente
+        return contador
+
+    def recorrer(self, indice):
+        nodo_actual = self.inicio
+        contador = 0
+        while nodo_actual is not None:
+            if contador == indice:
+                return nodo_actual
+            contador += 1
+            nodo_actual = nodo_actual.siguiente
+        return None
 
     def obtener_muestra(self, codigo):
         nodo_actual = self.inicio
@@ -43,9 +48,6 @@ class ListaMuestra:
             objeto = {
                 'Codigo': nodo_actual.codigo,
                 'Descripcion': nodo_actual.descripcion,
-                # 'Filas': nodo_actual.filas,
-                # 'Columnas': nodo_actual.columnas,
-                # 'Celdas Vivas': nodo_actual.listado_celda_viva.mostrar()
             }
             lista.append(objeto)
             nodo_actual = nodo_actual.siguiente
